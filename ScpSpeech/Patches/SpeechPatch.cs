@@ -25,8 +25,7 @@ namespace ScpSpeech.Patches
                 return true;
 
             if (Plugin.Instance.Config.GlobalTalking.Contains(player.Role) ||
-                player.CheckPermission($"ss.{player.Role.ToString().ToLower()}") ||
-                player.CheckPermission("ss.*"))
+                player.CheckPermission($"ss.{player.Role.ToString().ToLower()}"))
             {
                 __instance.MimicAs939 = value;
             }
