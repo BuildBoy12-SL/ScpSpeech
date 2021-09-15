@@ -7,6 +7,7 @@
 
 namespace ScpSpeech.Patches
 {
+#pragma warning disable SA1313
     using Assets._Scripts.Dissonance;
     using Exiled.API.Features;
     using Exiled.Permissions.Extensions;
