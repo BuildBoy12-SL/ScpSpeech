@@ -25,11 +25,11 @@ namespace ScpSpeech.Patches
         private static bool Prefix(NetworkConnection conn, Scp939VoiceMessage msg)
         {
             if (!ReferenceHub.TryGetHubNetID(conn.identity.netId, out ReferenceHub hub))
-                return false;
+                return true;
 
             Player player = Player.Get(hub);
             if (!player.IsScp)
-                return false;
+                return true;
 
             if (Plugin.Instance.Config.GlobalTalking.Contains(player.Role) ||
                 player.CheckPermission($"ss.{ScpToString(player.Role).ToLower()}"))
@@ -37,7 +37,7 @@ namespace ScpSpeech.Patches
                 hub.dissonanceUserSetup.MimicAs939 = msg.IsMimicking;
             }
 
-            return false;
+            return true;
         }
 
         private static string ScpToString(RoleType roleType)
