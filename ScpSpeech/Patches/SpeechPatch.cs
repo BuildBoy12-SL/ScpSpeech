@@ -12,9 +12,7 @@ namespace ScpSpeech.Patches
     using Exiled.API.Features;
     using Exiled.Permissions.Extensions;
     using HarmonyLib;
-    using Mirror;
     using PlayableScps;
-    using PlayableScps.Messages;
 
     /// <summary>
     /// Patches <see cref="Scp939.ServerReceivedVoiceMsg"/> to implement scps speaking to humans.
@@ -22,19 +20,16 @@ namespace ScpSpeech.Patches
     [HarmonyPatch(typeof(Scp939), nameof(Scp939.ServerReceivedVoiceMsg))]
     internal static class SpeechPatch
     {
-        private static bool Prefix(NetworkConnection conn, Scp939VoiceMessage msg)
+        private static bool Prefix(Radio __instance, bool b)
         {
-            if (!ReferenceHub.TryGetHubNetID(conn.identity.netId, out ReferenceHub hub))
-                return true;
-
-            Player player = Player.Get(hub);
+            Player player = Player.Get(__instance._hub);
             if (!player.IsScp)
                 return true;
 
             if (Plugin.Instance.Config.GlobalTalking.Contains(player.Role) ||
                 player.CheckPermission($"ss.{ScpToString(player.Role).ToLower()}"))
             {
-                hub.dissonanceUserSetup.MimicAs939 = msg.IsMimicking;
+                __instance._dissonanceSetup.MimicAs939 = b;
             }
 
             return true;
