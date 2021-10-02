@@ -22,6 +22,8 @@ namespace ScpSpeech
         public List<RoleType> GlobalTalking { get; set; } = new List<RoleType>
         {
             RoleType.Scp049,
+            RoleType.Scp93953,
+            RoleType.Scp93989,
         };
     }
 }

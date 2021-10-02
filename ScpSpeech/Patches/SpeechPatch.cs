@@ -17,7 +17,7 @@ namespace ScpSpeech.Patches
     /// <summary>
     /// Patches <see cref="Scp939.ServerReceivedVoiceMsg"/> to implement scps speaking to humans.
     /// </summary>
-    [HarmonyPatch(typeof(Scp939), nameof(Scp939.ServerReceivedVoiceMsg))]
+    [HarmonyPatch(typeof(Radio), nameof(Radio.UserCode_CmdSyncTransmissionStatus))]
     internal static class SpeechPatch
     {
         private static bool Prefix(Radio __instance, bool b)
