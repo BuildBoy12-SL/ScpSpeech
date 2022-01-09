@@ -16,31 +16,27 @@ namespace ScpSpeech
     /// </summary>
     public class Plugin : Plugin<Config>
     {
-        private Harmony harmony;
-
-        /// <summary>
-        /// Gets the only existing instance of the <see cref="Plugin"/> class.
-        /// </summary>
-        public static Plugin Instance { get; private set; }
+        private EventHandlers eventHandlers;
 
         /// <inheritdoc />
-        public override Version RequiredExiledVersion { get; } = new Version(3, 0, 0);
+        public override string Author { get; } = "Build";
+
+        /// <inheritdoc />
+        public override Version RequiredExiledVersion { get; } = new Version(4, 2, 2);
 
         /// <inheritdoc />
         public override void OnEnabled()
         {
-            Instance = this;
-            harmony = new Harmony($"build.scpspeech.{DateTime.UtcNow.Ticks}");
-            harmony.PatchAll();
+            eventHandlers = new EventHandlers(this);
+            Exiled.Events.Handlers.Player.Transmitting += eventHandlers.OnTransmitting;
             base.OnEnabled();
         }
 
         /// <inheritdoc />
         public override void OnDisabled()
         {
-            harmony.UnpatchAll();
-            harmony = null;
-            Instance = null;
+            Exiled.Events.Handlers.Player.Transmitting -= eventHandlers.OnTransmitting;
+            eventHandlers = null;
             base.OnDisabled();
         }
     }
