@@ -9,7 +9,6 @@ namespace ScpSpeech
 {
     using System;
     using Exiled.API.Features;
-    using HarmonyLib;
 
     /// <summary>
     /// The main plugin class.
