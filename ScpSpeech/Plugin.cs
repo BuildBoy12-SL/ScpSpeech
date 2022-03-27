@@ -18,10 +18,10 @@ namespace ScpSpeech
         private EventHandlers eventHandlers;
 
         /// <inheritdoc />
-        public override string Author { get; } = "Build";
+        public override string Author => "Build";
 
         /// <inheritdoc />
-        public override Version RequiredExiledVersion { get; } = new Version(4, 2, 2);
+        public override Version RequiredExiledVersion { get; } = new Version(5, 0, 0);
 
         /// <inheritdoc />
         public override void OnEnabled()
